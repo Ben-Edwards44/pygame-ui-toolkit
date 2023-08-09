@@ -7,7 +7,7 @@ from . import pygame
 
 
 class TextInput:
-    def __init__(self, input_button: object, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_selected: callable = None, on_deselect: callable = None, start_text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False):
+    def __init__(self, input_button: object, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_selected: callable = None, on_deselect: callable = None, start_text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False):
         self.font_colour = font_colour
         self.font_name = font_name
 
@@ -22,6 +22,7 @@ class TextInput:
         self.prefix_text = prefix_text
 
         self.antialias = antialias
+        self.change_font_size = change_font_size
 
         self.input_button = self.create_text_wrapper(input_button)
         self.normal_button_on_click = self.input_button.button_object.on_click
@@ -81,17 +82,19 @@ class TextInput:
     def update(self, pygame_event_loop: list[pygame.event.Event]) -> None:
         self.draw()
         self.check_deselect()
-        self.update_font_size()
+
+        if self.change_font_size:
+            self.update_font_size()
 
         if self.selected:
             self.take_input(pygame_event_loop)
 
 
 class RectTextInput(TextInput):
-    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  width: int, height: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, corner_radius: int = -1, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False):
+    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  width: int, height: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, corner_radius: int = -1, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False):
         input_button = self.create_button(surface, x, y, background_colour, width, height, on_click, on_hover, on_normal, corner_radius, click_once)
         
-        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, antialias)
+        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool) -> button.RectButton:
         btn = button.RectButton(surface, x, y, background_colour, width, height, on_click, on_hover, on_normal, corner_radius, click_once)
@@ -100,10 +103,10 @@ class RectTextInput(TextInput):
     
 
 class CircleTextInput(TextInput):
-    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  radius: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False):
+    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  radius: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False):
         input_button = self.create_button(surface, x, y, background_colour, radius, on_click, on_hover, on_normal, click_once)
         
-        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, antialias)
+        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], radius: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.CircleButton:
         btn = button.CircleButton(surface, x, y, background_colour, radius, on_click, on_hover, on_normal, click_once)
@@ -115,7 +118,7 @@ class PolygonTextInput(TextInput):
     def __init__(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False):
         input_button = self.create_button(surface, points, background_colour, on_click, on_hover, on_normal, click_once)
         
-        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, antialias)
+        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, False, antialias)
 
     def create_button(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.PolygonButton:
         btn = button.PolygonButton(surface, points, background_colour, on_click, on_hover, on_normal, click_once)
@@ -124,24 +127,36 @@ class PolygonTextInput(TextInput):
 
 
 class BorderedRectTextInput(TextInput):
-    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, corner_radius: int = -1, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False):
+    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, corner_radius: int = -1, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False):
         input_button = self.create_button(surface, x, y, background_colour, border_colour, width, height, border_width, on_click, on_hover, on_normal, corner_radius, click_once)
         
-        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, antialias)
+        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, corner_radius: int = -1, click_once: bool = True) -> button.BorderedRectButton:
         btn = button.BorderedRectButton(surface, x, y, background_colour, border_colour, width, height, border_width, on_click, on_hover, on_normal, corner_radius, click_once)
 
         return btn
-    
+
 
 class BorderedCircleTextInput(TextInput):
-    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  border_colour: tuple[int], radius: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False):
+    def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  border_colour: tuple[int], radius: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False):
         input_button = self.create_button(surface, x, y, background_colour, border_colour, radius, border_width, on_click, on_hover, on_normal, click_once)
         
-        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, antialias)
+        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], radius: int, border_width: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.BorderedCircleButton:
         btn = button.BorderedCircleButton(surface, x, y, background_colour, border_colour, radius, border_width, on_click, on_hover, on_normal, click_once)
+
+        return btn
+    
+
+class BorderedPolygonTextInput(TextInput):
+    def __init__(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], border_colour: tuple[int], border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False):
+        input_button = self.create_button(surface, points, background_colour, border_colour, border_width, on_click, on_hover, on_normal, click_once)
+        
+        super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, text, prefix_text, min_font_size, False, antialias)
+
+    def create_button(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], border_colour: tuple[int], border_width: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.BorderedPolygonButton:
+        btn = button.BorderedPolygonButton(surface, points, background_colour, border_colour, border_width, on_click, on_hover, on_normal, click_once)
 
         return btn
