@@ -3,7 +3,7 @@ from . import utils
 from . import pygame
 
 
-#TO DO: docstrings, (possibly) optional text sixe updating - this would allow support for polygon buttons
+#TO DO: docstrings
 
 
 class TextInput:
