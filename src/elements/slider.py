@@ -66,25 +66,12 @@ class Slider:
 
         self.value = self.get_value()
 
-    def handle_value_change(self) -> None:
-        if self.on_value_changed == None:
-            return
-        
-        num_params = utils.find_num_params(self.on_value_changed)
-
-        if num_params == 0:
-            self.on_value_changed()
-        elif num_params == 1:
-            self.on_value_changed(self.value)
-        else:
-            raise Exception(f"Invalid number of paramaters for {self.on_value_changed}. {self.on_value_changed} should accept 0 or 1 arguments.")
-
     def update(self) -> None:
         self.draw()
         self.slider_button.update()
 
         if self.value != self.prev_value:
-            self.handle_value_change()
+            utils.call_func(self.on_value_changed, self.value)
 
             self.prev_value = self.value
 

@@ -264,7 +264,10 @@ class TextWrapper:
     def blit_text(self) -> None:
         surf, rect = self.get_text()
         self.button_object.surface.blit(surf, rect)
-        
-    def update(self) -> None:
+
+    def draw(self) -> None:
         self.button_object.update()
         self.blit_text()
+        
+    def update(self) -> None:
+        self.draw()
