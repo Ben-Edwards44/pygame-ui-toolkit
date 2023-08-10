@@ -22,7 +22,10 @@ def create_text_boxes():
     rect_b = text.RectTextBox(window, 250, 80, 200, 50, "Ben is cool", BACKGROUND_COLOUR, FONT_COLOUR, FONT_SIZE)
     bord_rect_b = text.BorderedRectTextBox(window, 250, 150, 200, 50, "Ben is very cool", BACKGROUND_COLOUR, BORDER_COLOUR, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE)
 
-    return [polygon_b, bord_polygon_b, rect_b, bord_rect_b]
+    circ_b = text.CircleTextBox(window, 100, 250, 50, "Hi", BACKGROUND_COLOUR, FONT_COLOUR, FONT_SIZE)
+    bord_circ_b = text.BorderedCircleTextBox(window, 440, 250, 50, "Hi", BACKGROUND_COLOUR, BORDER_COLOUR, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE)
+
+    return [polygon_b, bord_polygon_b, rect_b, bord_rect_b, circ_b, bord_circ_b]
 
 
 def draw_boxes(text_boxes):
