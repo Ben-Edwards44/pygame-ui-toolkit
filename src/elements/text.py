@@ -63,31 +63,28 @@ class PolygonTextBox(TextBox):
         self.blit_text()
 
 
-class RectTextBox(PolygonTextBox):
-    def __init__(self, surface: pygame.Surface, x: int, y: int, width: int, height: int, text: str, background_colour: tuple[int], font_colour: tuple[int], font_size: int, font_name: str | None = None, antialias: bool = False) -> None:
+class RectTextBox(TextBox):
+    def __init__(self, surface: pygame.Surface, x: int, y: int, width: int, height: int, text: str, background_colour: tuple[int], font_colour: tuple[int], font_size: int, font_name: str | None = None, corner_radius: int = -1, antialias: bool = False) -> None:        
         self.x = x
         self.y = y
+        
+        self.center = (x, y)
 
         self.width = width
         self.height = height
 
-        points = self.create_points()
+        self.corner_radius = corner_radius
+
+        super().__init__(surface, text, background_colour, font_colour, font_size, font_name, antialias)
         
-        super().__init__(surface, points, text, background_colour, font_colour, font_size, font_name, antialias)
+    def draw(self) -> None:
+        pygame.draw.rect(self.surface, self.background_colour, (self.x - self.width // 2, self.y - self.height // 2, self.width, self.height))
 
-    def create_points(self) -> list[tuple[int, int]]:
-        offset_x = self.width // 2
-        offset_y = self.height // 2
-
-        multipliers = ((-1, -1), (-1, 1), (1, 1), (1, -1))
-        points = [(self.x + i * offset_x, self.y + j * offset_y) for i, j in multipliers]
-
-        return points
+        self.blit_text()
     
 
 class BorderedPolygonTextBox(PolygonTextBox):
     def __init__(self, surface: pygame.Surface, points: list[tuple[int, int]], text: str, background_colour: tuple[int], border_colour: tuple[int], border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, antialias: bool = False) -> None:
-        print(text, background_colour, border_colour, border_width)
         self.border_colour = border_colour
         self.border_width = border_width
         
@@ -108,7 +105,7 @@ class BorderedRectTextBox(RectTextBox):
         self.border_width = border_width
 
     def draw(self) -> None:
-        pygame.draw.polygon(self.surface, self.background_colour, self.points)
-        pygame.draw.polygon(self.surface, self.border_colour, self.points, self.border_width)
+        pygame.draw.rect(self.surface, self.background_colour, (self.x - self.width // 2, self.y - self.height // 2, self.width, self.height))
+        pygame.draw.rect(self.surface, self.border_colour, (self.x - self.width // 2, self.y - self.height // 2, self.width, self.height), self.border_width)
 
         self.blit_text()
