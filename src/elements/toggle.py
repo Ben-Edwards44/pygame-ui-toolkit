@@ -99,8 +99,8 @@ class TickBox(Toggle):
             self.draw_tick()
 
 
-class TickBoxToggle():
-    def __init__(self, surface: pygame.Surface, tick_thickness: int, tick_colour: tuple[int], tick_box_colour: tuple[int], outer_box_colour: tuple[int], x: int, y: int, width: int, height: int, text: str, font_colour: tuple[int], font_size: int, font_name: str | None = None, dist_from_left: int = 5, height_offset: int = 10, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_value_changed: callable = None, inner_corner_radius: int = -1, outer_corner_radius: int = -1, start_value: bool = False, text_to_right: bool = True, antialias: bool = False) -> None:
+class TickBoxToggle:
+    def __init__(self, surface: pygame.Surface, tick_thickness: int, tick_colour: tuple[int], tick_box_colour: tuple[int], outer_box_colour: tuple[int], x: int, y: int, width: int, height: int, text: str, font_colour: tuple[int], font_size: int, font_name: str | None = None, dist_from_edge: int = 5, height_offset: int = 10, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_value_changed: callable = None, inner_corner_radius: int = -1, outer_corner_radius: int = -1, start_value: bool = False, text_to_right: bool = True, antialias: bool = False) -> None:
         self.surface = surface
 
         self.x = x
@@ -109,26 +109,23 @@ class TickBoxToggle():
         self.width = width
         self.height = height
 
-        self.text = text
-
         self.outer_box_colour = outer_box_colour
         self.outer_corner_radius = outer_corner_radius
 
-        self.font_colour = font_colour
-        self.font = pygame.font.Font(font_name, font_size)
-
         self.text_to_right = text_to_right
 
-        self.antialias = antialias
+        self.tick_box = self.create_tick_box(tick_thickness, tick_colour, tick_box_colour, dist_from_edge, height_offset, on_click, on_hover, on_normal, on_value_changed, inner_corner_radius, start_value)
+        self.text_surface, self.text_rect = self.get_text(text, font_name, font_size, font_colour, antialias)
 
-        self.tick_box = self.create_tick_box(surface, tick_thickness, tick_colour, tick_box_colour, x, y, width, height, dist_from_left, height_offset, on_click, on_hover, on_normal, on_value_changed, inner_corner_radius, start_value)
-        self.text_surface, self.text_rect = self.get_text()
+    def create_tick_box(self, tick_thickness: int, tick_colour: tuple[int], background_colour: tuple[int], dist_from_edge: int, height_offset: int, on_click: callable, on_hover: callable, on_normal: callable, on_value_changed: callable, corner_radius: int, start_value: bool) -> TickBox:
+        new_height = self.height - height_offset
 
-    def create_tick_box(self, surface: pygame.Surface, tick_thickness: int, tick_colour: tuple[int], background_colour: tuple[int], x: int, y: int, width: int, height: int, dist_from_left: int, height_offset: int, on_click: callable, on_hover: callable, on_normal: callable, on_value_changed: callable, corner_radius: int, start_value: bool) -> TickBox:
-        new_height = height - height_offset
-        new_x = (x - width // 2) + dist_from_left + (new_height // 2)
+        if self.text_to_right:
+            new_x = (self.x - self.width // 2) + (new_height // 2) + dist_from_edge
+        else:
+            new_x = (self.x + self.width // 2) - (new_height // 2) - dist_from_edge
         
-        return TickBox(surface, tick_thickness, tick_colour, new_x, y, background_colour, new_height, on_click, on_hover, on_normal, corner_radius, on_value_changed, start_value)
+        return TickBox(self.surface, tick_thickness, tick_colour, new_x, self.y, background_colour, new_height, on_click, on_hover, on_normal, corner_radius, on_value_changed, start_value)
     
     def find_text_pos(self) -> tuple[int, int]:        
         dist_to_center = self.tick_box.button_object.width // 2
@@ -145,8 +142,10 @@ class TickBoxToggle():
 
         return (x, y)
     
-    def get_text(self) -> tuple[pygame.Surface, pygame.Rect]:
-        text_surf = self.font.render(self.text, self.antialias, self.font_colour, self.outer_box_colour)
+    def get_text(self, text: str, font_name: str | None, font_size: int, font_colour: tuple[int], antialias: bool) -> tuple[pygame.Surface, pygame.Rect]:
+        font = pygame.font.Font(font_name, font_size)
+        
+        text_surf = font.render(text, antialias, font_colour, self.outer_box_colour)
         text_rect = text_surf.get_rect()
 
         text_pos = self.find_text_pos()

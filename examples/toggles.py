@@ -26,7 +26,7 @@ def on_value_changed(value):
 
 def create_toggles():
     left_tick = toggle.TickBoxToggle(window, TICK_THICKNESS, TICK_COLOUR, TICK_BOX_COLOUR, OUTER_COLOUR, 250, 100, WIDTH, HEIGHT, "Tick box", FONT_COLOUR, FONT_SIZE, on_value_changed=on_value_changed, inner_corner_radius=5, outer_corner_radius=8)
-    right_tick = toggle.TickBoxToggle(window, TICK_THICKNESS, TICK_COLOUR, TICK_BOX_COLOUR, OUTER_COLOUR, 250, 400, WIDTH, HEIGHT, "Tick box", FONT_COLOUR, FONT_SIZE, on_value_changed=on_value_changed, inner_corner_radius=5, outer_corner_radius=8, text_to_right=False, dist_from_left=WIDTH - HEIGHT)
+    right_tick = toggle.TickBoxToggle(window, TICK_THICKNESS, TICK_COLOUR, TICK_BOX_COLOUR, OUTER_COLOUR, 250, 400, WIDTH, HEIGHT, "Tick box", FONT_COLOUR, FONT_SIZE, on_value_changed=on_value_changed, inner_corner_radius=5, outer_corner_radius=8, text_to_right=False)
 
     return [left_tick, right_tick]
 
