@@ -3,7 +3,7 @@ from . import utils
 from . import pygame
 
 
-# TODO: (possibly) seperate classes for each button, clean up code, docstrings
+# TODO: (possibly) seperate classes for each button, clean up code, docstrings, use dist_from_edge instead of dist_from_center
 
 
 class Toggle:
