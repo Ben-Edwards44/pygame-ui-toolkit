@@ -254,7 +254,7 @@ class TextWrapper:
 
         self.antialias = antialias
 
-    def get_text(self) -> tuple[pygame.Surface | pygame.Rect]:
+    def get_text(self) -> tuple[pygame.Surface, pygame.Rect]:
         text_surf = self.font.render(self.text, self.antialias, self.font_colour, self.button_object.background_colour)
         text_rect = text_surf.get_rect()
         text_rect.center = self.button_object.get_pos()
