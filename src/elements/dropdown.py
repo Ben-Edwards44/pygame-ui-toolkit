@@ -32,10 +32,12 @@ class Option:
 
 
 class Dropdown(toggle.Toggle):
-    def __init__(self, button_object: object, option_buttons: list[object], option_names: list[str], font_colour: tuple[int], font_size: int, font_name: str | None = None, initial_option: int = 0, start_active: bool = False, antialias: bool = False) -> None:
+    def __init__(self, button_object: object, option_buttons: list[object], option_names: list[str], font_colour: tuple[int], font_size: int, font_name: str | None = None, on_option_changed: callable = None, initial_option: int = 0, start_active: bool = False, antialias: bool = False) -> None:
         self.font_colour = font_colour
         self.font_size = font_size
         self.font_name = font_name
+
+        self.on_option_changed = on_option_changed
 
         self.antialias = antialias
         
@@ -69,6 +71,8 @@ class Dropdown(toggle.Toggle):
 
         self.text_wrapper.update_text(option.text_wrapper.text, self.font_colour, self.font_size, self.font_name)
 
+        utils.call_func(self.on_option_changed, option)
+
     def update(self) -> None:
         self.text_wrapper.update()
 
@@ -81,11 +85,11 @@ class Dropdown(toggle.Toggle):
 
 
 class RectDropdown(Dropdown):
-    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], width: int, height: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, corner_radius: int = -1, start_active: bool = False, antialias: bool = False) -> None:
+    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], width: int, height: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, on_option_changed: callable = None, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, corner_radius: int = -1, start_active: bool = False, antialias: bool = False) -> None:
         button_object = button.RectButton(surface, x, y, background_colour, width, height, on_click, on_hover, on_normal, corner_radius)
         option_buttons = self.create_buttons(surface, len(option_names), x, y, background_colour, width, height, y_offset, on_click, on_hover, on_normal, corner_radius)
 
-        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, initial_option, start_active, antialias)
+        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, on_option_changed, initial_option, start_active, antialias)
 
     def create_buttons(self, surface: pygame.Surface, num_options: int, x: int, y: int, colour: tuple[int], width: int, height: int, y_offset: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int) -> list[button.RectButton]:
         buttons = []
@@ -99,11 +103,11 @@ class RectDropdown(Dropdown):
     
 
 class CircleDropdown(Dropdown):
-    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], radius: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, start_active: bool = False, antialias: bool = False) -> None:
+    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], radius: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, on_option_changed: callable = None, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, start_active: bool = False, antialias: bool = False) -> None:
         button_object = button.CircleButton(surface, x, y, background_colour, radius, on_click, on_hover, on_normal)
         option_buttons = self.create_buttons(surface, len(option_names), x, y, background_colour, radius, y_offset, on_click, on_hover, on_normal)
 
-        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, initial_option, start_active, antialias)
+        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, on_option_changed, initial_option, start_active, antialias)
 
     def create_buttons(self, surface: pygame.Surface, num_options: int, x: int, y: int, colour: tuple[int], radius: int, y_offset: int, on_click: callable, on_hover: callable, on_normal: callable) -> list[button.RectButton]:
         buttons = []
@@ -117,11 +121,11 @@ class CircleDropdown(Dropdown):
     
 
 class BorderedRectDropdown(Dropdown):
-    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, corner_radius: int = -1, start_active: bool = False, antialias: bool = False) -> None:
+    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, on_option_changed: callable = None, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, corner_radius: int = -1, start_active: bool = False, antialias: bool = False) -> None:
         button_object = button.BorderedRectButton(surface, x, y, background_colour, border_colour, width, height, border_width, on_click, on_hover, on_normal, corner_radius)
         option_buttons = self.create_buttons(surface, len(option_names), x, y, background_colour, border_colour, width, height, border_width, y_offset, on_click, on_hover, on_normal, corner_radius)
 
-        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, initial_option, start_active, antialias)
+        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, on_option_changed, initial_option, start_active, antialias)
 
     def create_buttons(self, surface: pygame.Surface, num_options: int, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: tuple[int], y_offset: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int) -> list[button.RectButton]:
         buttons = []
@@ -135,11 +139,11 @@ class BorderedRectDropdown(Dropdown):
     
 
 class BorderedCircleDropdown(Dropdown):
-    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], radius: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, start_active: bool = False, antialias: bool = False) -> None:
+    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], radius: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, on_option_changed: callable = None, initial_option: int = 0, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, start_active: bool = False, antialias: bool = False) -> None:
         button_object = button.BorderedCircleButton(surface, x, y, background_colour, border_colour, radius, border_width, on_click, on_hover, on_normal)
         option_buttons = self.create_buttons(surface, len(option_names), x, y, background_colour, border_colour, radius, border_width, y_offset, on_click, on_hover, on_normal)
 
-        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, initial_option, start_active, antialias)
+        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, on_option_changed, initial_option, start_active, antialias)
 
     def create_buttons(self, surface: pygame.Surface, num_options: int, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], radius: int, border_width: int, y_offset: int, on_click: callable, on_hover: callable, on_normal: callable) -> list[button.RectButton]:
         buttons = []

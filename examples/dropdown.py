@@ -2,7 +2,7 @@ import pygame
 from src.elements import dropdown
 
 
-OPTIONS = ["Option 1", "Option 2", "Option 3"]
+OPTIONS = ["Option 1", "Option 2", "Option 3", "Hehe"]
 
 FONT_COLOUR = (0, 0, 0)
 FONT_SIZE = 30
@@ -22,12 +22,16 @@ def on_click():
     print("click")
 
 
-def create_dropdowns():
-    rect = dropdown.RectDropdown(window, OPTIONS, 100, 100, BACKGROUND_COLOUR, 95, 50, FONT_COLOUR, FONT_SIZE, on_click=on_click)
-    bord_rect = dropdown.BorderedRectDropdown(window, OPTIONS, 200, 100, BACKGROUND_COLOUR, BORDER_COLOUR, 95, 50, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, on_click=on_click)
+def on_option_changed(option):
+    print(option.text_wrapper.text)
 
-    circ = dropdown.CircleDropdown(window, OPTIONS, 300, 100, BACKGROUND_COLOUR, 45, FONT_COLOUR, FONT_SIZE, on_click=on_click)
-    bord_circ = dropdown.BorderedCircleDropdown(window, OPTIONS, 400, 100, BACKGROUND_COLOUR, BORDER_COLOUR, 45, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, on_click=on_click)
+
+def create_dropdowns():
+    rect = dropdown.RectDropdown(window, OPTIONS, 100, 100, BACKGROUND_COLOUR, 95, 50, FONT_COLOUR, FONT_SIZE, on_click=on_click, on_option_changed=on_option_changed)
+    bord_rect = dropdown.BorderedRectDropdown(window, OPTIONS, 200, 100, BACKGROUND_COLOUR, BORDER_COLOUR, 95, 50, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, on_click=on_click, on_option_changed=on_option_changed)
+
+    circ = dropdown.CircleDropdown(window, OPTIONS, 300, 100, BACKGROUND_COLOUR, 45, FONT_COLOUR, FONT_SIZE, on_click=on_click, on_option_changed=on_option_changed)
+    bord_circ = dropdown.BorderedCircleDropdown(window, OPTIONS, 400, 100, BACKGROUND_COLOUR, BORDER_COLOUR, 45, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, on_click=on_click, on_option_changed=on_option_changed)
 
     return [rect, bord_rect, circ, bord_circ]
 
