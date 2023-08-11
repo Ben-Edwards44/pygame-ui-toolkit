@@ -4,18 +4,28 @@ from src.elements import dropdown
 
 OPTIONS = ["Option 1", "Option 2", "Option 3"]
 
+FONT_COLOUR = (0, 0, 0)
+FONT_SIZE = 30
+
+BACKGROUND_COLOUR = (255, 255, 255)
+BORDER_COLOUR = (255, 0, 0)
+
+BORDER_WIDTH = 2
+
 
 pygame.init()
 window = pygame.display.set_mode((500, 500))
+pygame.display.set_caption("Dropdown menus")
 
 
 def create_dropdowns():
-    rect = dropdown.RectDropdown(window, OPTIONS, 250, 100, (255, 255, 255), 100, 50, (0, 0, 0), 32)
-    bord_rect = dropdown.BorderedRectDropdown(window, OPTIONS, 100, 100, (255, 255, 255), (255, 0, 0), 100, 50, 5, (0, 0, 0), 32)
+    rect = dropdown.RectDropdown(window, OPTIONS, 100, 100, BACKGROUND_COLOUR, 95, 50, FONT_COLOUR, FONT_SIZE)
+    bord_rect = dropdown.BorderedRectDropdown(window, OPTIONS, 200, 100, BACKGROUND_COLOUR, BORDER_COLOUR, 95, 50, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE)
 
-    circ = dropdown.CircleDropdown(window, OPTIONS, 400, 100, (255, 255, 255), 50, (0, 0, 0), 32)
+    circ = dropdown.CircleDropdown(window, OPTIONS, 300, 100, BACKGROUND_COLOUR, 45, FONT_COLOUR, FONT_SIZE)
+    bord_circ = dropdown.BorderedCircleDropdown(window, OPTIONS, 400, 100, BACKGROUND_COLOUR, BORDER_COLOUR, 45, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE)
 
-    return [rect, bord_rect, circ]
+    return [rect, bord_rect, circ, bord_circ]
 
 
 def update_dropdowns(dropdowns):

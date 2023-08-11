@@ -132,3 +132,21 @@ class BorderedRectDropdown(Dropdown):
             buttons.append(btn)
             
         return buttons
+    
+
+class BorderedCircleDropdown(Dropdown):
+    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], radius: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, start_active: bool = False, antialias: bool = False) -> None:
+        button_object = button.BorderedCircleButton(surface, x, y, background_colour, border_colour, radius, border_width)
+        option_buttons = self.create_buttons(surface, len(option_names), x, y, background_colour, border_colour, radius, border_width, y_offset)
+
+        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, initial_option, start_active, antialias)
+
+    def create_buttons(self, surface: pygame.Surface, num_options: int, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], radius: int, border_width: int, y_offset: int) -> list[button.RectButton]:
+        buttons = []
+        for i in range(1, num_options + 1):
+            new_y = y + i * (2 * radius + y_offset)
+
+            btn = button.BorderedCircleButton(surface, x, new_y, background_colour, border_colour, radius, border_width)
+            buttons.append(btn)
+            
+        return buttons
