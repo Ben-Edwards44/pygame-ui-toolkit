@@ -96,3 +96,21 @@ class RectDropdown(Dropdown):
             buttons.append(btn)
             
         return buttons
+    
+
+class BorderedRectDropdown(Dropdown):
+    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, corner_radius: int = -1, start_active: bool = False, antialias: bool = False) -> None:
+        button_object = button.BorderedRectButton(surface, x, y, background_colour, border_colour, width, height, border_width, corner_radius=corner_radius)
+        option_buttons = self.create_buttons(surface, len(option_names), x, y, background_colour, border_colour, width, height, border_width, y_offset, corner_radius)
+
+        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, initial_option, start_active, antialias)
+
+    def create_buttons(self, surface: pygame.Surface, num_options: int, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: tuple[int], y_offset: int, corner_radius: int) -> list[button.RectButton]:
+        buttons = []
+        for i in range(1, num_options + 1):
+            new_y = y + i * (height + y_offset)
+
+            btn = button.BorderedRectButton(surface, x, new_y, background_colour, border_colour, width, height, border_width, corner_radius=corner_radius)
+            buttons.append(btn)
+            
+        return buttons
