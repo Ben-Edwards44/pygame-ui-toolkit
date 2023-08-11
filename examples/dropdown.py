@@ -10,10 +10,12 @@ window = pygame.display.set_mode((500, 500))
 
 
 def create_dropdowns():
-    rect = dropdown.RectDropdown(window, OPTIONS, 250, 250, (255, 255, 255), 100, 50, (0, 0, 0), 32)
-    bord_rect = dropdown.BorderedRectDropdown(window, OPTIONS, 100, 250, (255, 255, 255), (255, 0, 0), 100, 50, 5, (0, 0, 0), 32)
+    rect = dropdown.RectDropdown(window, OPTIONS, 250, 100, (255, 255, 255), 100, 50, (0, 0, 0), 32)
+    bord_rect = dropdown.BorderedRectDropdown(window, OPTIONS, 100, 100, (255, 255, 255), (255, 0, 0), 100, 50, 5, (0, 0, 0), 32)
 
-    return [rect, bord_rect]
+    circ = dropdown.CircleDropdown(window, OPTIONS, 400, 100, (255, 255, 255), 50, (0, 0, 0), 32)
+
+    return [rect, bord_rect, circ]
 
 
 def update_dropdowns(dropdowns):

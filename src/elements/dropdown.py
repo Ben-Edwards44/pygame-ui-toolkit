@@ -98,6 +98,24 @@ class RectDropdown(Dropdown):
         return buttons
     
 
+class CircleDropdown(Dropdown):
+    def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], radius: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, start_active: bool = False, antialias: bool = False) -> None:
+        button_object = button.CircleButton(surface, x, y, background_colour, radius)
+        option_buttons = self.create_buttons(surface, len(option_names), x, y, background_colour, radius, y_offset)
+
+        super().__init__(button_object, option_buttons, option_names, font_colour, font_size, font_name, initial_option, start_active, antialias)
+
+    def create_buttons(self, surface: pygame.Surface, num_options: int, x: int, y: int, colour: tuple[int], radius: int, y_offset: int) -> list[button.RectButton]:
+        buttons = []
+        for i in range(1, num_options + 1):
+            new_y = y + i * (2 * radius + y_offset)
+
+            btn = button.CircleButton(surface, x, new_y, colour, radius)
+            buttons.append(btn)
+            
+        return buttons
+    
+
 class BorderedRectDropdown(Dropdown):
     def __init__(self, surface: pygame.Surface, option_names: list[str], x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, y_offset: int = 10, initial_option: int = 0, corner_radius: int = -1, start_active: bool = False, antialias: bool = False) -> None:
         button_object = button.BorderedRectButton(surface, x, y, background_colour, border_colour, width, height, border_width, corner_radius=corner_radius)
