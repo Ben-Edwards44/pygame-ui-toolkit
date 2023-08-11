@@ -254,6 +254,8 @@ class TextWrapper:
 
         self.antialias = antialias
 
+        self.text_surface, self.text_rect = self.get_text()
+
     def get_text(self) -> tuple[pygame.Surface, pygame.Rect]:
         text_surf = self.font.render(self.text, self.antialias, self.font_colour, self.button_object.background_colour)
         text_rect = text_surf.get_rect()
@@ -262,8 +264,14 @@ class TextWrapper:
         return text_surf, text_rect
     
     def blit_text(self) -> None:
-        surf, rect = self.get_text()
-        self.button_object.surface.blit(surf, rect)
+        self.button_object.surface.blit(self.text_surface, self.text_rect)
+
+    def update_text(self, new_text: str, new_font_colour: tuple[int], new_font_size: int, new_font_name: str | None = None) -> None:
+        self.text = new_text
+        self.font_colour = new_font_colour
+        self.font = pygame.font.Font(new_font_name, new_font_size)
+
+        self.text_surface, self.text_rect = self.get_text()
 
     def draw(self) -> None:
         self.button_object.update()
