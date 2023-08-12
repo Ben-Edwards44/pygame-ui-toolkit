@@ -7,7 +7,7 @@ from . import pygame
 
 
 class Slider:
-    def __init__(self, surface: pygame.Surface, length: int, width: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_width: int = 20, button_height: int = 20) -> None:
+    def __init__(self, surface: pygame.Surface, length: int, width: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_radius: int | None = None) -> None:
         self.surface = surface
         
         self.length = length
@@ -26,7 +26,10 @@ class Slider:
         self.on_value_changed = on_value_changed
 
         if slider_button == None:
-            self.slider_button = self.default_button(button_colour, button_width, button_height)
+            if button_radius == None:
+                button_radius = width
+
+            self.slider_button = button.CircleButton(surface, 0, 0, button_colour, button_radius)
         else:
             self.slider_button = slider_button
 
@@ -40,11 +43,6 @@ class Slider:
             raise Exception("Start value less than min value")
         elif value > max_value:
             raise Exception("Start value greater than max value")
-
-    def default_button(self, colour: tuple[int], width: int, height: int) -> button.RectButton:
-        btn = button.RectButton(self.surface, 0, 0, colour, width, height)
-
-        return btn
 
     def setup_button(self) -> None:
         self.slider_button.click_once = False
@@ -78,8 +76,8 @@ class Slider:
 
     
 class HorizontalSlider(Slider):
-    def __init__(self, surface: pygame.Surface, length: int, height: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_width: int = 10, button_height: int = 20) -> None:
-        super().__init__(surface, length, height, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_width, button_height)
+    def __init__(self, surface: pygame.Surface, length: int, height: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_radius: int | None = None) -> None:
+        super().__init__(surface, length, height, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_radius)
 
     def get_button_pos(self, value: float) -> tuple[int]:
         value_range = self.max_value - self.min_value
@@ -114,8 +112,8 @@ class HorizontalSlider(Slider):
 
 
 class VerticalSlider(Slider):
-    def __init__(self, surface: pygame.Surface, length: int, width: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_width: int = 20, button_height: int = 10) -> None:
-        super().__init__(surface, length, width, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_width, button_height)
+    def __init__(self, surface: pygame.Surface, length: int, width: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_radius: int | None = None) -> None:
+        super().__init__(surface, length, width, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_radius)
 
     def get_button_pos(self, value: float) -> tuple[int]:
         value_range = self.max_value - self.min_value
