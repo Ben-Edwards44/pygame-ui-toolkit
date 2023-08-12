@@ -7,11 +7,12 @@ from . import pygame
 
 
 class Slider:
-    def __init__(self, surface: pygame.Surface, length: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_width: int = 20, button_height: int = 20) -> None:
+    def __init__(self, surface: pygame.Surface, length: int, width: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_width: int = 20, button_height: int = 20) -> None:
         self.surface = surface
         
         self.length = length
-        
+        self.width = width
+
         self.x = x
         self.y = y
 
@@ -78,9 +79,7 @@ class Slider:
     
 class HorizontalSlider(Slider):
     def __init__(self, surface: pygame.Surface, length: int, height: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_width: int = 10, button_height: int = 20) -> None:
-        super().__init__(surface, length, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_width, button_height)
-
-        self.height = height
+        super().__init__(surface, length, height, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_width, button_height)
 
     def get_button_pos(self, value: float) -> tuple[int]:
         value_range = self.max_value - self.min_value
@@ -110,15 +109,13 @@ class HorizontalSlider(Slider):
         return self.min_value + proportion * range
     
     def draw(self) -> None:
-        rect = pygame.Rect(self.x - self.length // 2, self.y - self.height // 2, self.length, self.height)
+        rect = pygame.Rect(self.x - self.length // 2, self.y - self.width // 2, self.length, self.width)
         pygame.draw.rect(self.surface, self.slider_colour, rect)
 
 
 class VerticalSlider(Slider):
     def __init__(self, surface: pygame.Surface, length: int, width: int, x: int, y: int, min_value: float, max_value: float, start_value: float, slider_colour: tuple[int], on_value_changed: callable = None, slider_button: object | None = None, button_colour: tuple[int] = (255, 255, 255), button_width: int = 20, button_height: int = 10) -> None:
-        super().__init__(surface, length, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_width, button_height)
-
-        self.width = width
+        super().__init__(surface, length, width, x, y, min_value, max_value, start_value, slider_colour, on_value_changed, slider_button, button_colour, button_width, button_height)
 
     def get_button_pos(self, value: float) -> tuple[int]:
         value_range = self.max_value - self.min_value
