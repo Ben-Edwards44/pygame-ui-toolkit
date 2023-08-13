@@ -70,7 +70,7 @@ class Slider:
         self.slider_button.update()
 
         if self.value != self.prev_value:
-            utils.call_func(self.on_value_changed, self.value)
+            utils.call_func(self.on_value_changed, self.value, self)
 
             self.prev_value = self.value
 

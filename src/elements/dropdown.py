@@ -71,7 +71,7 @@ class Dropdown(toggle.Toggle):
 
         self.text_wrapper.update_text(option.text_wrapper.text, self.font_colour, self.font_size, self.font_name)
 
-        utils.call_func(self.on_option_changed, option)
+        utils.call_func(self.on_option_changed, option, self)
 
     def update(self) -> None:
         self.text_wrapper.update()

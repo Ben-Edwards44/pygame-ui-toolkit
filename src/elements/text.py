@@ -1,4 +1,3 @@
-from src.elements import pygame
 from . import pygame
 
 

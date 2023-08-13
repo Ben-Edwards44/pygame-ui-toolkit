@@ -3,7 +3,7 @@ from . import utils
 from . import pygame
 
 
-#TO DO: docstrings
+#TO DO: docstrings, on_input
 
 
 class TextInput:
