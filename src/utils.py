@@ -8,7 +8,7 @@ def find_num_params(func: callable) -> int:
     return len(params)
 
 
-def call_func(func: callable, arg1: any) -> None:
+def call_func(func: callable, *args) -> None:
     if func == None:
         return
     
@@ -17,6 +17,8 @@ def call_func(func: callable, arg1: any) -> None:
     if num_params == 0:
         func()
     elif num_params == 1:
-        func(arg1)
+        func(args[0])
+    elif num_params == 2:
+        func(args[0], args[1])
     else:
-        raise Exception(f"Invalid number of parameters for {func}. {func} should accept 0 or 1 arguments.")
+        raise Exception(f"Invalid number of parameters for {func}. {func} should accept 0, 1 or 2 arguments.")
