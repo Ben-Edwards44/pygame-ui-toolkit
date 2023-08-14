@@ -2,9 +2,6 @@ from . import pygame
 from . import utils
 
 
-#TO DO: docstrings
-
-
 class Button:
     """
     The base class that all other button classes inherit from.
