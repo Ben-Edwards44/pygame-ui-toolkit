@@ -7,7 +7,7 @@ class Button:
     The base class that all other button classes inherit from.
 
     This class should not be used directly. 
-    Instead use RectButton, CircleButton, PolygonButton, BorderedRectButton, BorderedCircleButton, or BorderedPolygonButton
+    Instead use RectButton, CircleButton, PolygonButton, BorderedRectButton, BorderedCircleButton, or BorderedPolygonButton.
 
     Attributes
     ----------
@@ -18,11 +18,11 @@ class Button:
     y : int
         the y position of the center of the button
     on_click : callable | None, optional
-        the function that is called when the button is clicked (defaults to None)
+        the function that is called when the button is clicked. If the function accepts 1 argument, self is passed into it (defaults to None)
     on_hover : callable | None, optional
-        the function that is called when the button is hovered over (defaults to None)
+        the function that is called when the button is hovered over. If the function accepts 1 argument, self is passed into it (defaults to None)
     on_normal : callable | None, optional
-        the function that is called when the button is neither clicked or hovered over (defaults to None)
+        the function that is called when the button is neither clicked or hovered over. If the function accepts 1 argument, self is passed into it (defaults to None)
     click_once : bool, optional
         if True, the on_click and on_hover functions will be called once per click or hover event, otherwise they will be called every ferame the button is clicked or hovered (defaults to True)
     
