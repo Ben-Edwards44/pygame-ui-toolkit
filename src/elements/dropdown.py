@@ -4,7 +4,7 @@ from . import utils
 from . import pygame
 
 
-#TODO: docstrings, (possibly) on_click, on_hover, on_normal etc for option buttons
+#TODO: docstrings
 
 
 class Option:

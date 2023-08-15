@@ -3,7 +3,7 @@ from . import utils
 from . import pygame
 
 
-#TO DO: docstrings, (possibly) slider with value text
+#TO DO: docstrings
 
 
 class Slider:

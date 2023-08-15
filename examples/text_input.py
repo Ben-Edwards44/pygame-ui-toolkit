@@ -62,15 +62,19 @@ def on_deselect(text_input):
     text_input.input_button.button_object.background_colour = DESELECTED_COLOUR
 
 
+def on_text_input(txt):
+    print(txt)
+
+
 def create_text_inputs():
-    rect = input.RectTextInput(window, 250, 80, DESELECTED_COLOUR, BUTTON_WIDTH, BUTTON_HEIGHT, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, click_once=False, prefix_text="Type here: ")
-    bord_rect = input.BorderedRectTextInput(window, 250, 160, DESELECTED_COLOUR, BORDER_COLOUR, BUTTON_WIDTH, BUTTON_HEIGHT, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, click_once=False)
+    rect = input.RectTextInput(window, 250, 80, DESELECTED_COLOUR, BUTTON_WIDTH, BUTTON_HEIGHT, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, on_text_input, click_once=False, prefix_text="Type here: ")
+    bord_rect = input.BorderedRectTextInput(window, 250, 160, DESELECTED_COLOUR, BORDER_COLOUR, BUTTON_WIDTH, BUTTON_HEIGHT, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, on_text_input, click_once=False)
 
-    circ = input.CircleTextInput(window, 250, 320, DESELECTED_COLOUR, BUTTON_RADIUS, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, False, "Enter text")
-    bord_circ = input.BorderedCircleTextInput(window, 250, 440, DESELECTED_COLOUR, BORDER_COLOUR, BUTTON_RADIUS, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, False)
+    circ = input.CircleTextInput(window, 250, 320, DESELECTED_COLOUR, BUTTON_RADIUS, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, on_text_input, False, "Enter text")
+    bord_circ = input.BorderedCircleTextInput(window, 250, 440, DESELECTED_COLOUR, BORDER_COLOUR, BUTTON_RADIUS, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, on_text_input, False)
 
-    poly = input.PolygonTextInput(window, [(125, 200), (200, 250), (125, 300), (50, 250)], DESELECTED_COLOUR, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, False)
-    bord_poly = input.BorderedPolygonTextInput(window, [(375, 200), (450, 250), (375, 300), (300, 250)], DESELECTED_COLOUR, BORDER_COLOUR, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, False)
+    poly = input.PolygonTextInput(window, [(125, 200), (200, 250), (125, 300), (50, 250)], DESELECTED_COLOUR, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, on_text_input, False)
+    bord_poly = input.BorderedPolygonTextInput(window, [(375, 200), (450, 250), (375, 300), (300, 250)], DESELECTED_COLOUR, BORDER_COLOUR, BORDER_WIDTH, FONT_COLOUR, FONT_SIZE, None, button_click, button_hover, button_normal, on_selected, on_deselect, on_text_input, False)
 
     return [rect, bord_rect, circ, bord_circ, poly, bord_poly]
 

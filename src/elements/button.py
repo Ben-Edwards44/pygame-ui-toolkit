@@ -609,7 +609,8 @@ class TextWrapper:
         if new_font_colour != None:
             self.font_colour = new_font_colour
 
-        self.font = pygame.font.Font(new_font_name, new_font_size)
+        if new_font_size != None:
+            self.font = pygame.font.Font(new_font_name, new_font_size)
 
         self.text_surface, self.text_rect = self.get_text()
 
