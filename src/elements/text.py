@@ -5,7 +5,43 @@ from . import pygame
 
 
 class TextBox:
+    """
+    The base text box class that all other text boxes inherit from.
+
+    This class should not be used directly.
+    Instead use PolygonTextBox, RectTextBox, CircleTextBox, BorderedPolygonTextBox, BorderedRectTextBox or BorderedCircleTextBox.
+
+    Attributes
+    ----------
+    surface : pygame.Surface
+        the surface that the text box is drawn to
+    text : str
+        the text displayed on the text box
+    background_colour : tuple[int]
+        the colour of the text box
+    font_colour : tuple[int]
+        the colour of the text
+    font : pygame.font.Font
+        the font object used to blit text
+    antialias : bool, optional
+        whether the text is drawn with antialias (defaults to False)
+    text_surface : pygame.Surface
+        the surface used to render text
+    text_rect : pygame.Rect
+        the rect position that the text is drawn to
+
+    Methods
+    -------
+    get_text()
+        return a text surface to draw and a rect object to draw it to
+    update_text()
+        change the text, font colour, font size or font name of the displayed text
+    blit_text()
+        draw the text to the screen
+    """
+
     def __init__(self, surface: pygame.Surface, text: str, background_colour: tuple[int], font_colour: tuple[int], font_size: int, font_name: str | None = None, antialias: bool = False) -> None:
+        """Construct the necessary attributes of the TextBox object."""
         self.surface = surface
         
         self.text = text
@@ -13,16 +49,15 @@ class TextBox:
         self.background_colour = background_colour
         self.font_colour = font_colour
 
-        self.font_size = font_size
-        self.font_name = font_name
+        self.font = pygame.font.Font(font_name, font_size)
 
         self.antialias = antialias
 
         self.text_surface, self.text_rect = self.get_text()
 
     def get_text(self) -> tuple[pygame.Surface, pygame.Rect]:
-        font = pygame.font.Font(self.font_name, self.font_size)
-        text_surface = font.render(self.text, self.antialias, self.font_colour)
+        """Return a text surface to draw and a rect object to draw it to."""
+        text_surface = self.font.render(self.text, self.antialias, self.font_colour)
         
         text_rect = text_surface.get_rect()
 
@@ -33,14 +68,26 @@ class TextBox:
 
         return text_surface, text_rect
 
-    def update_text(self, new_text: str, new_font_colour: tuple[int], new_font_size: int) -> None:
-        self.text = new_text
-        self.font_colour = new_font_colour
-        self.font_size = new_font_size
+    def update_text(self, new_text: str | None = None, new_font_colour: tuple[int] | None = None, new_font_size: int | None = None, new_font_name: str | None = None) -> None:
+        """
+        Change the text, font colour, font size or font name of the displayed text.
+        
+        If any argument (other the new_font_name) is None, that part of the text will remain unchanged.
+        """
+
+        if new_text != None:
+            self.text = new_text
+
+        if new_font_colour != None:
+            self.font_colour = new_font_colour
+
+        if new_font_size != None:
+            self.font = pygame.font.Font(new_font_name, new_font_size)
 
         self.text_surface, self.text_rect = self.get_text()
 
     def blit_text(self) -> None:
+        """Draw the text to the screen."""
         self.surface.blit(self.text_surface, self.text_rect)
 
 
