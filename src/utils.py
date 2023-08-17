@@ -1,4 +1,5 @@
 from inspect import signature
+from pygame import font
 
 
 def find_num_params(func: callable) -> int:
@@ -22,3 +23,10 @@ def call_func(func: callable, *args) -> None:
         func(args[0], args[1])
     else:
         raise Exception(f"Invalid number of parameters for {func}. {func} should accept 0, 1 or 2 arguments.")
+    
+
+def update_font_attrs(obj: object, text: str, font_colour: tuple[int], font_name: str, font_size: int) -> None:
+    obj.text = text
+    obj.font_colour = font_colour
+
+    obj.font = font.Font(font_name, font_size)

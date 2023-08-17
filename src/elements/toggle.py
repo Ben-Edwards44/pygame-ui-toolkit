@@ -3,9 +3,6 @@ from . import utils
 from . import pygame
 
 
-# TODO: change TickBoxToggle to use update_text() - don't forget about the docstrings
-
-
 class Toggle:
     """
     The base class from which all other toggles inherit from.
@@ -102,6 +99,8 @@ class TextToggle(Toggle):
     -------
     get_text()
         return a text surface and a rect object for text
+    update_text(new_text: str, new_font_colour: tuple[int], new_font_size: int, new_font_name: str | None, new_text_x: int | None = None, new_text_y: int | None = None)
+        change the text, font colour, font size, font name or position of the displayed text
     blit_text()
         draw text to the screen
     draw()
@@ -129,6 +128,17 @@ class TextToggle(Toggle):
         text_rect.center = (self.text_x, self.text_y)
 
         return text_surf, text_rect
+    
+    def update_text(self, new_text: str, new_font_colour: tuple[int], new_font_size: int, new_font_name: str | None, new_text_x: int | None = None, new_text_y: int | None = None) -> None:
+        """Change the text, font colour, font size, font name or position of the displayed text."""
+        utils.update_font_attrs(self, new_text, new_font_colour, new_font_name, new_font_size)
+
+        if new_text_x != None:
+            self.text_x = new_text_x
+        if new_text_y != None:
+            self.text_y = new_text_y
+
+        self.text_surface, self.text_rect = self.get_text()
     
     def blit_text(self) -> None:
         """Draw text to the screen."""
@@ -222,6 +232,12 @@ class TickBoxToggle:
         the radius of the rounded corners of the outer box, where -1 means no rounded corners (defaults to -1)
     text_to_right : bool, optional
         whether the text is drawn to the right of the tick box (defaults to True)
+    text : str
+        the displayed text
+    font_colour : tuple[int]
+        the colour of the displayed text
+    font : pygame.Surface
+        the surface object used to render text
     tick_box : TickBox
         the tick box object for the toggle
     text_surface : pygame.Surface
@@ -237,6 +253,8 @@ class TickBoxToggle:
         return the x, y position of the text
     get_text()
         return the text surface and rect objects to draw text
+    update_text(new_text: str, new_font_colour: tuple[int], new_font_size: int, new_font_name: str | None)
+        change the text, font colour, font size, or font name of the displayed text
     draw()
         draw the outer box, tick box and text to the screen
     update()
@@ -258,8 +276,15 @@ class TickBoxToggle:
 
         self.text_to_right = text_to_right
 
+        self.text = text
+
+        self.font_colour = font_colour
+        self.font = pygame.font.Font(font_name, font_size)
+
+        self.antialias = antialias
+
         self.tick_box = self.create_tick_box(tick_thickness, tick_colour, tick_box_colour, dist_from_edge, height_offset, on_click, on_hover, on_normal, on_value_changed, inner_corner_radius, start_value)
-        self.text_surface, self.text_rect = self.get_text(text, font_name, font_size, font_colour, antialias)
+        self.text_surface, self.text_rect = self.get_text()
 
     def create_tick_box(self, tick_thickness: int, tick_colour: tuple[int], background_colour: tuple[int], dist_from_edge: int, height_offset: int, on_click: callable, on_hover: callable, on_normal: callable, on_value_changed: callable, corner_radius: int, start_value: bool) -> TickBox:
         """Return the tick box object with the appropriate size and position."""
@@ -288,17 +313,21 @@ class TickBoxToggle:
 
         return (x, y)
     
-    def get_text(self, text: str, font_name: str | None, font_size: int, font_colour: tuple[int], antialias: bool) -> tuple[pygame.Surface, pygame.Rect]:
+    def get_text(self) -> tuple[pygame.Surface, pygame.Rect]:
         """Return the text surface and rect objects to draw text."""
-        font = pygame.font.Font(font_name, font_size)
-        
-        text_surf = font.render(text, antialias, font_colour, self.outer_box_colour)
+        text_surf = self.font.render(self.text, self.antialias, self.font_colour, self.outer_box_colour)
         text_rect = text_surf.get_rect()
 
         text_pos = self.find_text_pos()
         text_rect.center = text_pos
 
         return text_surf, text_rect
+    
+    def update_text(self, new_text: str, new_font_colour: tuple[int], new_font_size: int, new_font_name: str | None) -> None:
+        """Change the text, font colour, font size, or font name of the displayed text."""
+        utils.update_font_attrs(self, new_text, new_font_colour, new_font_name, new_font_size)
+
+        self.text_surface, self.text_rect = self.get_text()
 
     def draw(self) -> None:
         """Draw the outer box, tick box and text to the screen."""

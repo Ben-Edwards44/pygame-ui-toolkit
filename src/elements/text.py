@@ -1,7 +1,5 @@
 from . import pygame
-
-
-#TODO docstrings
+from . import utils
 
 
 class TextBox:
@@ -68,21 +66,9 @@ class TextBox:
 
         return text_surface, text_rect
 
-    def update_text(self, new_text: str | None = None, new_font_colour: tuple[int] | None = None, new_font_size: int | None = None, new_font_name: str | None = None) -> None:
-        """
-        Change the text, font colour, font size or font name of the displayed text.
-        
-        If any argument (other the new_font_name) is None, that part of the text will remain unchanged.
-        """
-
-        if new_text != None:
-            self.text = new_text
-
-        if new_font_colour != None:
-            self.font_colour = new_font_colour
-
-        if new_font_size != None:
-            self.font = pygame.font.Font(new_font_name, new_font_size)
+    def update_text(self, new_text: str, new_font_colour: tuple[int], new_font_size: int, new_font_name: str | None) -> None:
+        """Change the text, font colour, font size or font name of the displayed text."""
+        utils.update_font_attrs(self, new_text, new_font_colour, new_font_name, new_font_size)
 
         self.text_surface, self.text_rect = self.get_text()
 

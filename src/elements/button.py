@@ -600,17 +600,9 @@ class TextWrapper:
         """Draw text to the screen."""
         self.button_object.surface.blit(self.text_surface, self.text_rect)
 
-    def update_text(self, new_text: str | None = None, new_font_colour: tuple[int] | None = None, new_font_size: int | None = None, new_font_name: str | None = None) -> None:
+    def update_text(self, new_text: str, new_font_colour: tuple[int], new_font_size: int, new_font_name: str | None) -> None:
         """Change the text, font_colour, font attributes of the object."""
-
-        if new_text != None:
-            self.text = new_text
-
-        if new_font_colour != None:
-            self.font_colour = new_font_colour
-
-        if new_font_size != None:
-            self.font = pygame.font.Font(new_font_name, new_font_size)
+        utils.update_font_attrs(self, new_text, new_font_colour, new_font_name, new_font_size)
 
         self.text_surface, self.text_rect = self.get_text()
 

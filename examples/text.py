@@ -26,7 +26,7 @@ def on_click(btn: button.TextWrapper):
     num_click = get_num(btn.text)
     num_click += 1
 
-    btn.update_text(f"Clicked: {num_click}", FONT_COLOUR, FONT_SIZE)
+    btn.update_text(f"Clicked: {num_click}", FONT_COLOUR, FONT_SIZE, None)
 
 
 def button1():

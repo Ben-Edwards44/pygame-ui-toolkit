@@ -79,7 +79,7 @@ class TextInput:
             self.input_button.font = pygame.font.Font(self.font_name, self.font_size)
 
     def draw(self) -> None:
-        self.input_button.update_text(f"{self.prefix_text}{self.text}")
+        self.input_button.update_text(f"{self.prefix_text}{self.text}", self.font_colour, self.font_size, self.font_name)
         self.input_button.update()
 
     def update(self, pygame_event_loop: list[pygame.event.Event]) -> None:
