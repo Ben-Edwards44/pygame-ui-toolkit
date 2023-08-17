@@ -3,9 +3,6 @@ from . import utils
 from . import pygame
 
 
-#TO DO: docstrings
-
-
 class TextInput:
     """
     The base class for all text inputs.
@@ -168,72 +165,182 @@ class TextInput:
 
 
 class RectTextInput(TextInput):
+    """
+    A text input in the shape of a rectangle.
+
+    Inherits from TextInput
+
+    Attributes
+    ----------
+    all attributes from TextInput
+
+    Methods
+    -------
+    all methods from TextInput
+    create_button(surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool)
+        return a button object with the appropriate shape
+    """
+
     def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  width: int, height: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, on_text_input: callable = None, corner_radius: int = -1, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False) -> None:
+        """Construct the necessary attributes for the RectTextInput object."""
         input_button = self.create_button(surface, x, y, background_colour, width, height, on_click, on_hover, on_normal, corner_radius, click_once)
         
         super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, on_text_input, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool) -> button.RectButton:
+        """Return a button object with the appropriate shape."""
         btn = button.RectButton(surface, x, y, background_colour, width, height, on_click, on_hover, on_normal, corner_radius, click_once)
 
         return btn
     
 
 class CircleTextInput(TextInput):
+    """
+    A text input in the shape of a circle.
+
+    Inherits from TextInput.
+
+    Attributes
+    ----------
+    all attributes from TextInput
+
+    Methods
+    -------
+    all methods from TextInput
+    create_button(surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool)
+        return a button object with the appropriate shape
+    """
+    
     def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  radius: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, on_text_input: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False) -> None:
+        """Construct the necessary attributes for the CircleTextInput object."""
         input_button = self.create_button(surface, x, y, background_colour, radius, on_click, on_hover, on_normal, click_once)
         
         super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, on_text_input, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], radius: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.CircleButton:
+        """Return a button object with the appropriate shape."""
         btn = button.CircleButton(surface, x, y, background_colour, radius, on_click, on_hover, on_normal, click_once)
 
         return btn
     
 
 class PolygonTextInput(TextInput):
+    """
+    A text input in the shape of any convex polygon.
+    Concave polygons are not supported and will result in unexpected behaviour.
+
+    Inherits from TextInput.
+
+    Attributes
+    ----------
+    all attributes from TextInput
+
+    Methods
+    -------
+    all methods from TextInput
+    create_button(surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool)
+        return a button object with the appropriate shape
+    """
+    
     def __init__(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, on_text_input: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False) -> None:
+        """Construct the necessary attributes for the PolygonTextInput object."""
         input_button = self.create_button(surface, points, background_colour, on_click, on_hover, on_normal, click_once)
         
         super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, on_text_input, text, prefix_text, min_font_size, False, antialias)
 
     def create_button(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.PolygonButton:
+        """Return a button object with the appropriate shape."""
         btn = button.PolygonButton(surface, points, background_colour, on_click, on_hover, on_normal, click_once)
 
         return btn
 
 
 class BorderedRectTextInput(TextInput):
+    """
+    A text input in the shape of a rectangle with a border.
+
+    Inherits from TextInput.
+
+    Attributes
+    ----------
+    all attributes from TextInput
+
+    Methods
+    -------
+    all methods from TextInput
+    create_button(surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool)
+        return a button object with the appropriate shape
+    """
+
     def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, on_text_input: callable = None, corner_radius: int = -1, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False) -> None:
+        """Construct the necessary attributes for the BorderedRectTextInput object."""
         input_button = self.create_button(surface, x, y, background_colour, border_colour, width, height, border_width, on_click, on_hover, on_normal, corner_radius, click_once)
         
         super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, on_text_input, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], width: int, height: int, border_width: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, corner_radius: int = -1, click_once: bool = True) -> button.BorderedRectButton:
+        """Return a button object with the appropriate shape."""
         btn = button.BorderedRectButton(surface, x, y, background_colour, border_colour, width, height, border_width, on_click, on_hover, on_normal, corner_radius, click_once)
 
         return btn
 
 
 class BorderedCircleTextInput(TextInput):
+    """
+    A text input in the shape of a circle with a border.
+
+    Inherits from TextInput.
+
+    Attributes
+    ----------
+    all attributes from TextInput
+
+    Methods
+    -------
+    all methods from TextInput
+    create_button(surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool)
+        return a button object with the appropriate shape
+    """
+
     def __init__(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int],  border_colour: tuple[int], radius: int, border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, on_text_input: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, change_font_size: bool = True, antialias: bool = False) -> None:
+        """Construct the necessary attributes for the BorderedCircleTextInput object."""
         input_button = self.create_button(surface, x, y, background_colour, border_colour, radius, border_width, on_click, on_hover, on_normal, click_once)
         
         super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, on_text_input, text, prefix_text, min_font_size, change_font_size, antialias)
 
     def create_button(self, surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], border_colour: tuple[int], radius: int, border_width: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.BorderedCircleButton:
+        """Return a button object with the appropriate shape."""
         btn = button.BorderedCircleButton(surface, x, y, background_colour, border_colour, radius, border_width, on_click, on_hover, on_normal, click_once)
 
         return btn
     
 
 class BorderedPolygonTextInput(TextInput):
+    """
+    A text input in the shape of any convex polygon with a border.
+    Concave polygons are not supported and will result in unexpected behaviour.
+
+    Inherits from TextInput.
+
+    Attributes
+    ----------
+    all attributes from TextInput
+
+    Methods
+    -------
+    all methods from TextInput
+    create_button(surface: pygame.Surface, x: int, y: int, background_colour: tuple[int], width: int, height: int, on_click: callable, on_hover: callable, on_normal: callable, corner_radius: int, click_once: bool)
+        return a button object with the appropriate shape
+    """
+
     def __init__(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], border_colour: tuple[int], border_width: int, font_colour: tuple[int], font_size: int, font_name: str | None = None, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, on_selected: callable = None, on_deselect: callable = None, on_text_input: callable = None, click_once: bool = True, text: str = "", prefix_text: str = "", min_font_size: int = 10, antialias: bool = False) -> None:
+        """Construct the necessary attributes for the BorderedPolygonTextInput object."""
         input_button = self.create_button(surface, points, background_colour, border_colour, border_width, on_click, on_hover, on_normal, click_once)
         
         super().__init__(input_button, font_colour, font_size, font_name, on_selected, on_deselect, on_text_input, text, prefix_text, min_font_size, False, antialias)
 
     def create_button(self, surface: pygame.Surface, points: list[tuple[int]], background_colour: tuple[int], border_colour: tuple[int], border_width: int, on_click: callable = None, on_hover: callable = None, on_normal: callable = None, click_once: bool = True) -> button.BorderedPolygonButton:
+        """Return a button object with the appropriate shape."""
         btn = button.BorderedPolygonButton(surface, points, background_colour, border_colour, border_width, on_click, on_hover, on_normal, click_once)
 
         return btn
