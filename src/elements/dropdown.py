@@ -4,9 +4,6 @@ from . import utils
 from . import pygame
 
 
-#TODO: docstrings
-
-
 class Option:
     """
     An individual option for the dropdown menu.
