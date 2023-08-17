@@ -3,6 +3,7 @@ from pygame import font
 
 
 def find_num_params(func: callable) -> int:
+    """Return the number of arguments a function accepts."""
     sig = signature(func)
     params = sig.parameters
 
@@ -10,6 +11,12 @@ def find_num_params(func: callable) -> int:
 
 
 def call_func(func: callable, *args) -> None:
+    """
+    Call a function - if it is not None - and pass the appropriate arguments in to it.
+    
+    An exception is raised if the function accepts an invalid number of arguments.
+    """
+
     if func == None:
         return
     
@@ -26,6 +33,7 @@ def call_func(func: callable, *args) -> None:
     
 
 def update_font_attrs(obj: object, text: str, font_colour: tuple[int], font_name: str, font_size: int) -> None:
+    """Change the text, font colour and font attributes of an object."""
     obj.text = text
     obj.font_colour = font_colour
 
