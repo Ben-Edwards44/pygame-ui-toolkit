@@ -3,7 +3,7 @@ from . import utils
 from . import pygame
 
 
-# TODO: docstrings
+# TODO: change TickBoxToggle to use update_text() - don't forget about the docstrings
 
 
 class Toggle:
