@@ -2,6 +2,9 @@ from . import button
 from . import pygame
 
 
+#TODO: correct type hints, docstrings, support for polygon buttons, docs for size
+
+
 stored_variables = {}
 
 
@@ -25,8 +28,16 @@ def update_button_size(button_object: button.RectButton, event_type: str) -> Non
     button_object.call_func(variables[f"on_{event_type}"])
 
     size = variables[f"{event_type}_size"]
-    button_object.width = size[0]
-    button_object.height = size[1]
+
+    t = type(button_object)
+
+    if t == button.RectButton or t == button.BorderedRectButton:
+        button_object.width = size[0]
+        button_object.height = size[1]
+    elif t == button.CircleButton or t == button.BorderedCircleButton:
+        button_object.radius = size
+    else:
+        raise Exception("Unsupported button type for a size change. Use any rect or circle buttons only.")
 
 
 def on_click_func(button_object: button.RectButton) -> None:
@@ -50,3 +61,17 @@ def create_button(normal_size: tuple[int], hover_size: tuple[int], click_size: t
     assign_variables(button_object, normal_size, hover_size, click_size, on_normal, on_hover, on_click)
 
     return button_object
+
+
+def change_existing_button(button_object: object, normal_size: tuple[int] | int, hover_size: tuple[int] | int, click_size: tuple[int] | int) -> None:
+    on_click = button_object.on_click
+    on_hover = button_object.on_hover
+    on_normal = button_object.on_normal
+    
+    button_object.on_click = on_click_func
+    button_object.on_hover = on_hover_func
+    button_object.on_normal = on_normal_func
+
+    button_object.click_once = False
+
+    assign_variables(button_object, normal_size, hover_size, click_size, on_normal, on_hover, on_click)
