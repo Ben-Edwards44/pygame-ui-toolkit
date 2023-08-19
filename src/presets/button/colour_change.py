@@ -45,3 +45,17 @@ def create_button(normal_colour: tuple[int], hover_colour: tuple[int], click_col
     assign_variables(button_object, normal_colour, hover_colour, click_colour, on_normal, on_hover, on_click)
 
     return button_object
+
+
+def change_existing_button(button_object: button.PolygonButton, normal_colour: tuple[int], hover_colour: tuple[int], click_colour: tuple[int]):
+    on_click = button_object.on_click
+    on_hover = button_object.on_hover
+    on_normal = button_object.on_normal
+    
+    button_object.on_click = on_click_func
+    button_object.on_hover = on_hover_func
+    button_object.on_normal = on_normal_func
+
+    button_object.click_once = False
+
+    assign_variables(button_object, normal_colour, hover_colour, click_colour, on_normal, on_hover, on_click)
