@@ -244,6 +244,8 @@ class TickBoxToggle:
         the surface object used to render text
     text_rect : pygame.Rect
         the rect position that the text is drawn to
+    selected : bool
+        whether the toggle is currrently selected
 
     Methods
     -------
