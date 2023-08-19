@@ -286,6 +286,8 @@ class TickBoxToggle:
         self.tick_box = self.create_tick_box(tick_thickness, tick_colour, tick_box_colour, dist_from_edge, height_offset, on_click, on_hover, on_normal, on_value_changed, inner_corner_radius, start_value)
         self.text_surface, self.text_rect = self.get_text()
 
+        self.selected = self.tick_box.selected
+
     def create_tick_box(self, tick_thickness: int, tick_colour: tuple[int], background_colour: tuple[int], dist_from_edge: int, height_offset: int, on_click: callable, on_hover: callable, on_normal: callable, on_value_changed: callable, corner_radius: int, start_value: bool) -> TickBox:
         """Return the tick box object with the appropriate size and position."""
         new_height = self.height - height_offset
@@ -347,3 +349,5 @@ class TickBoxToggle:
 
         self.tick_box.update()
         self.draw()
+
+        self.selected = self.tick_box.selected
