@@ -6,7 +6,7 @@ stored_variables = {}
 
 
 def assign_variables(button_object: button.Button, normal_colour: tuple[int], hover_colour: tuple[int], click_colour: tuple[int], on_normal: callable, on_hover: callable, on_click: callable) -> None:
-    """Assign variables that need to be used later to a global dict with the slider object as the key."""
+    """Assign variables that need to be used later to a global dict with the button object as the key."""
     
     current_variables = {
         "normal_colour" : normal_colour,
