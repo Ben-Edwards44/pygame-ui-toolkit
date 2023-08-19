@@ -65,8 +65,8 @@ def create_button(normal_size: tuple[int], hover_size: tuple[int], click_size: t
 
     Notes
     -----
-    Size should be provided in the form (width, height):
-    - e.g. size of (100, 50) would result in a button with width 100 and height 50
+    normal_size, hover_size and click_size should be provided as a tuple in the form (width, height):
+    - e.g. a value of (100, 50) would result in a button with width 100 and height 50
     """
 
     button_object = button.RectButton(surface, x, y, background_colour, normal_size[0], normal_size[1], on_click_func, on_hover_func, on_normal_func, corner_radius, False)
