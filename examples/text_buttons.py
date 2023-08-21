@@ -1,5 +1,5 @@
-from src.elements import button
 import pygame
+from src.elements import button
 
 
 TEXT_COLOUR = (0, 0, 0)
@@ -59,6 +59,8 @@ def create_buttons():
 
 
 def update_buttons():
+    window.fill((0, 0, 0))
+    
     for btn in buttons:
         btn.update()
 
@@ -76,3 +78,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+
+
+if __name__ == "__main__":
+    main()

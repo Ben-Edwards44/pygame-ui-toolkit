@@ -70,25 +70,13 @@ def create_vertical_sliders():
     return sliders
 
 
-def blit_text(sliders):
-    font = pygame.font.Font(None, 25)
-
-    for i in sliders:
-        text_surf = font.render(f"{i.value :.1f}", False, (255, 255, 255))
-
-        text_rect = text_surf.get_rect()
-        text_rect.center = (i.x + 25, i.y + 25)
-
-        window.blit(text_surf, text_rect)
-
-    pygame.display.update()
-
-
 def update_sliders(sliders):
     window.fill((0, 0, 0))
 
     for i in sliders:
         i.update()
+
+    pygame.display.update()
 
 
 def main():
@@ -99,7 +87,6 @@ def main():
 
     while True:
         update_sliders(sliders)
-        blit_text(sliders)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

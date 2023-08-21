@@ -2,7 +2,7 @@ import pygame
 from src.elements import dropdown
 
 
-OPTIONS = ["Option 1", "Option 2", "Option 3", "Hehe"]
+OPTIONS = ["Option 1", "Option 2", "Option 3"]
 
 FONT_COLOUR = (0, 0, 0)
 FONT_SIZE = 30

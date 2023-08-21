@@ -37,7 +37,8 @@ def create_button():
     return btn
 
 
-def update_buttons(btn):
+def update_button(btn):
+    window.fill((0, 0, 0))
     btn.update()
     pygame.display.update()
 
@@ -46,7 +47,7 @@ def main():
     btn = create_button()
 
     while True:
-        update_buttons(btn)
+        update_button(btn)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
