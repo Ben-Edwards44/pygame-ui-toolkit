@@ -400,8 +400,8 @@ class ImageButton(RectButton):
     -------
     This class inherits from RectButton, so contains all the methods that RectButton does.
     It also contains these additional methods:
-    setup_image()
-        set image attribute to a pygame Surface object for the button's image
+    update_image()
+        update the image attribute of the object
 
     The following methods are overwritten:
     draw()
@@ -412,13 +412,11 @@ class ImageButton(RectButton):
         """Construct the necessary attributes for the ImageButton object"""
         super().__init__(surface, x, y, None, width, height, on_click, on_hover, on_normal, -1, click_once)
 
-        self.image_path = image_path
+        self.update_image(image_path)
 
-        self.setup_image()
-
-    def setup_image(self) -> None:
-        """Set image attribute to a pygame Surface object for the button's image."""
-        image = pygame.image.load(self.image_path)
+    def update_image(self, new_image_path: str) -> None:
+        """Update the image attribute of the object."""
+        image = pygame.image.load(new_image_path)
         scaled_image = pygame.transform.scale(image, (self.width, self.height))
 
         self.image = scaled_image

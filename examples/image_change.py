@@ -17,18 +17,16 @@ pygame.display.set_caption("Image buttons")
 
 
 def on_click(btn):
-    btn.image_path = CLICK_IMG_PATH
-    btn.setup_image()
+    btn.update_image(CLICK_IMG_PATH)
 
 
 def on_hover(btn):
-    btn.image_path = HOVER_IMG_PATH
-    btn.setup_image()
+    btn.update_image(HOVER_IMG_PATH)
+
 
 
 def on_normal(btn):
-    btn.image_path = NORMAL_IMG_PATH
-    btn.setup_image()
+    btn.update_image(NORMAL_IMG_PATH)
 
 
 def create_button():
