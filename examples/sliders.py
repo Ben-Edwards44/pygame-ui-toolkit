@@ -1,5 +1,5 @@
 import pygame
-from src.elements import slider, button
+from pygame_ui_toolkit.elements import slider, button
 
 
 NORMAL_COLOUR = (255, 255, 255)

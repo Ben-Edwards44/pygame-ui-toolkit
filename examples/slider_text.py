@@ -1,5 +1,5 @@
 import pygame
-from src.presets.slider import value_text
+from pygame_ui_toolkit.presets.slider import value_text
 
 
 NORMAL_COLOUR = (255, 255, 255)

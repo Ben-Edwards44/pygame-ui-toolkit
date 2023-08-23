@@ -1,5 +1,5 @@
 import pygame
-from src.elements import toggle, text
+from pygame_ui_toolkit.elements import toggle, text
 
 
 TICK_COLOUR = (0, 0, 0)

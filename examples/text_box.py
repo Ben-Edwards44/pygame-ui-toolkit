@@ -1,5 +1,5 @@
 import pygame
-from src.elements import text
+from pygame_ui_toolkit.elements import text
 
 
 TEXT = "Hello, World!"

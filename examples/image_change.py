@@ -1,6 +1,6 @@
 import pygame
 from os import getcwd
-from src.elements import button
+from pygame_ui_toolkit.elements import button
 
 
 CLICK_IMG_PATH = f"{getcwd()}\\examples\\images\\smile3.png"

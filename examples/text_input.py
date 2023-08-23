@@ -1,5 +1,5 @@
 import pygame
-from src.presets.input import size_colour_change
+from pygame_ui_toolkit.presets.input import size_colour_change
 
 
 NORMAL_SIZE = (200, 60)

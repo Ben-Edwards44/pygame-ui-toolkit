@@ -1,5 +1,5 @@
 import pygame
-from src.elements import dropdown
+from pygame_ui_toolkit.elements import dropdown
 
 
 OPTIONS = ["Option 1", "Option 2", "Option 3"]

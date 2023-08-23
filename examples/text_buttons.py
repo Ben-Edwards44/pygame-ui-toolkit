@@ -1,5 +1,5 @@
 import pygame
-from src.elements import button
+from pygame_ui_toolkit.elements import button
 
 
 TEXT_COLOUR = (0, 0, 0)
