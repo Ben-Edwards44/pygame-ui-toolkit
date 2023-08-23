@@ -18,11 +18,11 @@ setuptools.setup(
     long_description=FULL_DESC,
     long_description_content_type="text/markdown",
     url="https://github.com/Ben-Edwards44/pygame-ui-toolkit",
-    py_modules=["pygame_ui_toolkit"],
+    #py_modules=["pygame_ui_toolkit"],
     packages=setuptools.find_packages(exclude=["examples"]),
     install_requires=DEPENDENCIES,
     python_requires=">=3.6",
-    #package_dir={"" : "pygame_ui_toolkit"},
+    #package_dir={"src" : "pygame_ui_toolkit"},
     license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",
