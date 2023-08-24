@@ -1,9 +1,7 @@
 import setuptools
 
 
-DEPENDENCIES = [
-    "pygame>=2.0.0"
-]
+DEPENDENCIES = ["pygame>=2.0.0"]
 
 
 with open("README.md", "r") as file:
@@ -13,7 +11,7 @@ with open("README.md", "r") as file:
 setuptools.setup(
     name="pygame-ui-toolkit",
     author="Ben Edwards",
-    version="0.0.2",
+    version="1.0.0",
     description="A package for creating UI elements in pygame",
     long_description=FULL_DESC,
     long_description_content_type="text/markdown",
