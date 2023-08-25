@@ -28,7 +28,7 @@ As a general tip, always remember to call an element's `update()` method **once 
     import pygame_ui_toolkit
 
     # Create the button
-    button = pygame_ui_toolkit.elements.button.RectButton(...)
+    button = pygame_ui_toolkit.button.RectButton(...)
 
     # Main loop
     while True:
