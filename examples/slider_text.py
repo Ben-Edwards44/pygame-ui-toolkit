@@ -1,5 +1,5 @@
 import pygame
-from pygame_ui_toolkit.presets.slider import value_text
+from pygame_ui_toolkit.presets import slider_value_text
 
 
 NORMAL_COLOUR = (255, 255, 255)
@@ -28,8 +28,8 @@ pygame.display.set_caption("Sliders with text")
 
 def create_sliders():
     start = (MAX_VALUE + MIN_VALUE) // 2
-    hor_slider = value_text.create_slider_text(window, 250, 100, 250, 125, SLIDER_LENGTH, SLIDER_THICKNESS, MIN_VALUE, MAX_VALUE, start, SLIDER_COLOUR, FONT_NAME, FONT_SIZE, FONT_COLOUR)
-    vert_slider = value_text.create_slider_text(window, 250, 300, 285, 300, SLIDER_LENGTH, SLIDER_THICKNESS, MIN_VALUE, MAX_VALUE, start, SLIDER_COLOUR, FONT_NAME, FONT_SIZE, FONT_COLOUR, horizontal_slider=False)
+    hor_slider = slider_value_text.create_slider_text(window, 250, 100, 250, 125, SLIDER_LENGTH, SLIDER_THICKNESS, MIN_VALUE, MAX_VALUE, start, SLIDER_COLOUR, FONT_NAME, FONT_SIZE, FONT_COLOUR)
+    vert_slider = slider_value_text.create_slider_text(window, 250, 300, 285, 300, SLIDER_LENGTH, SLIDER_THICKNESS, MIN_VALUE, MAX_VALUE, start, SLIDER_COLOUR, FONT_NAME, FONT_SIZE, FONT_COLOUR, horizontal_slider=False)
 
     return hor_slider, vert_slider
 
@@ -39,7 +39,7 @@ def update_sliders(sliders):
 
     for i in sliders:
         i.update()
-        value_text.blit_slider_text(i)
+        slider_value_text.blit_slider_text(i)
 
     pygame.display.update()
 

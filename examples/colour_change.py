@@ -1,6 +1,6 @@
 import pygame
 from pygame_ui_toolkit.elements import button
-from pygame_ui_toolkit.presets.buttons import colour_change, size_change
+from pygame_ui_toolkit.presets import button_colour_change, button_size_change
 
 
 CLICK_COLOUR = (255, 0, 0)
@@ -39,12 +39,12 @@ def create_buttons():
 def prepare_buttons(buttons):
     for i, x in enumerate(buttons):
         if i < 6:
-            colour_change.change_existing_button(x, NORMAL_COLOUR, HOVER_COLOUR, CLICK_COLOUR)
+            button_colour_change.change_existing_button(x, NORMAL_COLOUR, HOVER_COLOUR, CLICK_COLOUR)
         else:
             if type(x) == button.RectButton or type(x) == button.BorderedRectButton:
-                size_change.change_existing_button(x, NORMAL_SIZE, HOVER_SIZE, CLICK_SIZE)
+                button_size_change.change_existing_button(x, NORMAL_SIZE, HOVER_SIZE, CLICK_SIZE)
             else:
-                size_change.change_existing_button(x, NORMAL_SIZE[0] // 2, HOVER_SIZE[0] // 2, CLICK_SIZE[0] // 2)
+                button_size_change.change_existing_button(x, NORMAL_SIZE[0] // 2, HOVER_SIZE[0] // 2, CLICK_SIZE[0] // 2)
 
 
 def update_buttons(buttons):

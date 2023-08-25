@@ -1,5 +1,5 @@
 import pygame
-from pygame_ui_toolkit.presets.input import size_colour_change
+from pygame_ui_toolkit.presets import input_size_colour_change
 
 
 NORMAL_SIZE = (200, 60)
@@ -26,8 +26,8 @@ def on_text_input(txt):
 
 
 def create_text_inputs():
-    input1 = size_colour_change.create_text_input(DESELECTED_COLOUR, SELECTED_COLOUR, NORMAL_SIZE, HOVER_SIZE, CLICK_SIZE, window, 250, 150, FONT_COLOUR, FONT_SIZE, on_text_input=on_text_input, prefix_text="Text: ")
-    input2 = size_colour_change.create_text_input(DESELECTED_COLOUR, SELECTED_COLOUR, NORMAL_SIZE, HOVER_SIZE, CLICK_SIZE, window, 250, 350, FONT_COLOUR, FONT_SIZE, on_text_input=on_text_input)
+    input1 = input_size_colour_change.create_text_input(DESELECTED_COLOUR, SELECTED_COLOUR, NORMAL_SIZE, HOVER_SIZE, CLICK_SIZE, window, 250, 150, FONT_COLOUR, FONT_SIZE, on_text_input=on_text_input, prefix_text="Text: ")
+    input2 = input_size_colour_change.create_text_input(DESELECTED_COLOUR, SELECTED_COLOUR, NORMAL_SIZE, HOVER_SIZE, CLICK_SIZE, window, 250, 350, FONT_COLOUR, FONT_SIZE, on_text_input=on_text_input)
 
     return input1, input2
 

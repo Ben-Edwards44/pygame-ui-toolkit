@@ -1,5 +1,5 @@
-from pygame_ui_toolkit.presets.buttons import size_change
-from pygame_ui_toolkit.presets.buttons import colour_change
+from pygame_ui_toolkit.presets import button_size_change
+from pygame_ui_toolkit.presets import button_colour_change
 from pygame_ui_toolkit.elements import input
 from pygame_ui_toolkit import utils
 from pygame_ui_toolkit import pygame
@@ -30,7 +30,7 @@ def change_colour(text_input: input.TextInput, normal_event_func: callable, new_
 def on_selected_func(text_input: input.TextInput) -> None:
     """The function called when the input is selected."""
     normal = stored_variables[text_input]["on_select"]
-    new = colour_change.on_click_func
+    new = button_colour_change.on_click_func
 
     change_colour(text_input, normal, new)
 
@@ -38,7 +38,7 @@ def on_selected_func(text_input: input.TextInput) -> None:
 def on_deselect_func(text_input: input.TextInput) -> None:
     """The function called when the input is deselected."""
     normal = stored_variables[text_input]["on_deselect"]
-    new = colour_change.on_normal_func
+    new = button_colour_change.on_normal_func
 
     change_colour(text_input, normal, new)
 
@@ -81,5 +81,5 @@ def change_existing_text_input(text_input: input.TextInput, deselected_colour: t
     text_input.on_selected = on_selected_func
     text_input.on_deselect = on_deselect_func
 
-    size_change.change_existing_button(button_object, normal_size, hover_size, click_size)
-    colour_change.assign_variables(button_object, deselected_colour, deselected_colour, selected_colour, None, None, None)
+    button_size_change.change_existing_button(button_object, normal_size, hover_size, click_size)
+    button_colour_change.assign_variables(button_object, deselected_colour, deselected_colour, selected_colour, None, None, None)
