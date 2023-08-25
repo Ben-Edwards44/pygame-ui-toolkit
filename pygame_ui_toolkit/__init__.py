@@ -1,4 +1,4 @@
 import pygame
 
-import pygame_ui_toolkit.elements as elements
-import pygame_ui_toolkit.presets as presets
+from pygame_ui_toolkit.elements import *
+from pygame_ui_toolkit.presets import *
