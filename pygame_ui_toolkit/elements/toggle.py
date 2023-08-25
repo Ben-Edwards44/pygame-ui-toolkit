@@ -1,6 +1,6 @@
-from . import button
-from . import utils
-from . import pygame
+from pygame_ui_toolkit.elements import button
+from pygame_ui_toolkit import utils
+from pygame_ui_toolkit import pygame
 
 
 class Toggle:

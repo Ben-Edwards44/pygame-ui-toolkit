@@ -1,5 +1,5 @@
-from . import pygame
-from . import utils
+from pygame_ui_toolkit import pygame
+from pygame_ui_toolkit import utils
 
 
 class Button:

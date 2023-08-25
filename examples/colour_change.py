@@ -1,6 +1,6 @@
 import pygame
 from pygame_ui_toolkit.elements import button
-from pygame_ui_toolkit.presets.button import colour_change, size_change
+from pygame_ui_toolkit.presets.buttons import colour_change, size_change
 
 
 CLICK_COLOUR = (255, 0, 0)

@@ -1,5 +1,5 @@
-from . import button
-from . import pygame
+from pygame_ui_toolkit.elements import button
+from pygame_ui_toolkit import pygame
 
 
 stored_variables = {}
