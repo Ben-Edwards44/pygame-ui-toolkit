@@ -66,11 +66,11 @@ class Toggle:
 
         This should be called once per frame.
         """
-        self.draw()
-
         if self.selected != self.prev_selected:
             utils.call_func(self.on_value_changed, self.selected, self)
             self.prev_selected = self.selected
+
+        self.draw()
 
 
 class TextToggle(Toggle):

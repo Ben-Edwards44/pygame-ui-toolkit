@@ -153,14 +153,14 @@ class Dropdown(toggle.Toggle):
 
         This should be called once per frame.
         """
+        if self.selected != self.prev_selected:
+            utils.call_func(self.on_value_changed, self.selected)
+            self.prev_selected = self.selected
+
         self.text_wrapper.update()
 
         for i in self.options:
             i.update()
-
-        if self.selected != self.prev_selected:
-            utils.call_func(self.on_value_changed, self.selected)
-            self.prev_selected = self.selected
 
 
 class RectDropdown(Dropdown):

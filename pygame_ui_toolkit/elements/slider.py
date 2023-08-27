@@ -119,13 +119,13 @@ class Slider:
 
         This should be called once per frame.
         """
-        self.draw()
-        self.slider_button.update()
-
         if self.value != self.prev_value:
             utils.call_func(self.on_value_changed, self.value, self)
 
             self.prev_value = self.value
+
+        self.draw()
+        self.slider_button.update()
 
     
 class HorizontalSlider(Slider):

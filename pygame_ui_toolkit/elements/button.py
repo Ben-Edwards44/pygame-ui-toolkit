@@ -148,7 +148,6 @@ class Button:
 
         An exception is raised if the button object does not contain the nessesary methods.
         """
-        self.draw()
         
         if not hasattr(self, "check_click") or not hasattr(self, "check_hover"):
             raise Exception("Base Button class should not be used by itself. Use another class like RectButton instead")
@@ -159,6 +158,8 @@ class Button:
             self.call_func(self.on_hover)
         else:
             self.call_func(self.on_normal)
+
+        self.draw()
 
 
 class RectButton(Button):

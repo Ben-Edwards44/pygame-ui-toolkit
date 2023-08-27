@@ -154,7 +154,6 @@ class TextInput:
 
         This should be called once per frame.
         """
-        self.draw()
         self.check_deselect()
 
         if self.change_font_size:
@@ -162,6 +161,8 @@ class TextInput:
 
         if self.selected:
             self.take_input(pygame_event_loop)
+
+        self.draw()
 
 
 class RectTextInput(TextInput):
