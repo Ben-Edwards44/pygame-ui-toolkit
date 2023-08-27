@@ -11,7 +11,7 @@ with open("README.md", "r") as file:
 setuptools.setup(
     name="pygame-ui-toolkit",
     author="Ben Edwards",
-    version="1.0.3",
+    version="1.0.4",
     description="A package for creating UI elements in pygame",
     long_description=FULL_DESC,
     long_description_content_type="text/markdown",
