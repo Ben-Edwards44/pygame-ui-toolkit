@@ -23,7 +23,7 @@ def on_click():
 
 
 def on_option_changed(option):
-    print(option.text_wrapper.text)
+    print(option.name)
 
 
 def create_dropdowns():

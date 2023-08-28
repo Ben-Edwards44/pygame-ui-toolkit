@@ -18,6 +18,8 @@ class Option:
         the text wrapper button's on_click function before it is changed by the Option class
     active : bool
         whether or not this option should be displayed and updated
+    name : str
+        the name of the option
 
     Methods
     -------
@@ -37,6 +39,8 @@ class Option:
         self.normal_button_on_click = text_wrapper.button_object.on_click
 
         self.active = start_active
+
+        self.name = text_wrapper.text
 
         self.setup_button()
 
